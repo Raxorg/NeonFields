@@ -3,6 +3,8 @@ package com.epicness.neonfields.splash;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.epicness.fundamentals.assets.Assets;
+import static com.epicness.neonfields.splash.SplashConstants.SPLASH_SCREEN_GLOW;
+import static com.epicness.neonfields.splash.SplashConstants.SPLASH_SCREEN_LOGO;
 
 public class SplashAssets extends Assets {
 
@@ -10,8 +12,8 @@ public class SplashAssets extends Assets {
 
     @Override
     public void queueAssetLoading() {
-        assetManager.load("images/splash/splash.png", Texture.class);
-        assetManager.load("images/splash/splashGlow.png", Texture.class);
+        assetManager.load(SPLASH_SCREEN_LOGO, Texture.class);
+        assetManager.load(SPLASH_SCREEN_GLOW, Texture.class);
     }
 
     @Override
@@ -22,8 +24,8 @@ public class SplashAssets extends Assets {
 
     @Override
     public void initializeAssets() {
-        splash = new Sprite(assetManager.get("images/splash/splash.png", Texture.class));
-        splashGlow = new Sprite(assetManager.get("images/splash/splashGlow.png", Texture.class));
+        splash = new Sprite(getSprite(SPLASH_SCREEN_LOGO));
+        splashGlow = new Sprite(getSprite(SPLASH_SCREEN_GLOW));
     }
 
     public Sprite getSplash() {
