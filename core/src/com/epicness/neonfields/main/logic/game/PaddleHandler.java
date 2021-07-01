@@ -1,0 +1,166 @@
+package com.epicness.neonfields.main.logic.game;
+
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.epicness.neonfields.main.stuff.Ball;
+import com.epicness.neonfields.main.stuff.Life;
+import com.epicness.neonfields.main.stuff.MainStuff;
+import com.epicness.neonfields.main.stuff.Paddle;
+
+import static com.epicness.neonfields.main.MainConstants.MAX_PADDLE_Y;
+import static com.epicness.neonfields.main.MainConstants.MIN_PADDLE_TO_BALL_DISTANCE;
+import static com.epicness.neonfields.main.MainConstants.MIN_PADDLE_Y;
+import static com.epicness.neonfields.main.MainConstants.PADDLE_SPEED;
+import static com.epicness.neonfields.main.MainEnums.PaddleState.IDLE;
+import static com.epicness.neonfields.main.MainEnums.PaddleState.MOVING_DOWN;
+import static com.epicness.neonfields.main.MainEnums.PaddleState.MOVING_UP;
+
+public class PaddleHandler {
+
+    private MainStuff stuff;
+
+    public void paddleUpPress(boolean paddle1) {
+        Paddle paddle = paddle1 ? stuff.getPaddle1() : stuff.getPaddle2();
+        DelayedRemovalArray<Life> lives = paddle1 ? stuff.getPaddle1Lives() : stuff.getPaddle2Lives();
+        if (lives.size <= 0) {
+            return;
+        }
+        switch (paddle.getState()) {
+            case IDLE:
+                paddle.setState(MOVING_UP);
+                break;
+            case MOVING_DOWN:
+                paddle.setState(IDLE);
+                break;
+        }
+    }
+
+    public void paddleDownPress(boolean paddle1) {
+        Paddle paddle = paddle1 ? stuff.getPaddle1() : stuff.getPaddle2();
+        DelayedRemovalArray<Life> lives = paddle1 ? stuff.getPaddle1Lives() : stuff.getPaddle2Lives();
+        if (lives.size <= 0) {
+            return;
+        }
+        switch (paddle.getState()) {
+            case MOVING_UP:
+                paddle.setState(IDLE);
+                break;
+            case IDLE:
+                paddle.setState(MOVING_DOWN);
+                break;
+        }
+    }
+
+    public void paddleUpRelease(boolean paddle1) {
+        Paddle paddle = paddle1 ? stuff.getPaddle1() : stuff.getPaddle2();
+        DelayedRemovalArray<Life> lives = paddle1 ? stuff.getPaddle1Lives() : stuff.getPaddle2Lives();
+        if (lives.size <= 0) {
+            return;
+        }
+        switch (paddle.getState()) {
+            case MOVING_UP:
+                paddle.setState(IDLE);
+                break;
+            case IDLE:
+                paddle.setState(MOVING_DOWN);
+                break;
+        }
+    }
+
+    public void paddleDownRelease(boolean paddle1) {
+        Paddle paddle = paddle1 ? stuff.getPaddle1() : stuff.getPaddle2();
+        DelayedRemovalArray<Life> lives = paddle1 ? stuff.getPaddle1Lives() : stuff.getPaddle2Lives();
+        if (lives.size <= 0) {
+            return;
+        }
+        switch (paddle.getState()) {
+            case IDLE:
+                paddle.setState(MOVING_UP);
+                break;
+            case MOVING_DOWN:
+                paddle.setState(IDLE);
+                break;
+        }
+    }
+
+    public void update(float delta) {
+        Paddle paddle = stuff.getPaddle1();
+        if (paddle.isControlledByAI()) {
+            solvePaddleAI(paddle);
+        }
+        movePaddle(paddle, delta);
+        checkPaddleBounds(paddle);
+
+        paddle = stuff.getPaddle2();
+        if (paddle.isControlledByAI()) {
+            solvePaddleAI(paddle);
+        }
+        movePaddle(paddle, delta);
+        checkPaddleBounds(paddle);
+    }
+
+    private void movePaddle(Paddle paddle, float delta) {
+        switch (paddle.getState()) {
+            case MOVING_UP:
+                paddle.translateY(PADDLE_SPEED * delta);
+                break;
+            case MOVING_DOWN:
+                paddle.translateY(-PADDLE_SPEED * delta);
+                break;
+        }
+    }
+
+    private void checkPaddleBounds(Paddle paddle) {
+        float paddleY = paddle.getY();
+        if (paddleY < MIN_PADDLE_Y) {
+            paddle.setY(MIN_PADDLE_Y);
+        }
+        if (paddleY > MAX_PADDLE_Y) {
+            paddle.setY(MAX_PADDLE_Y);
+        }
+    }
+
+    private void solvePaddleAI(Paddle paddle) {
+        DelayedRemovalArray<Ball> balls = stuff.getBalls();
+        if (balls.size == 0f) {
+            return;
+        }
+        Ball closestBall = calculateClosestBall(paddle, balls);
+        // Based on the ball position relative to the paddle, move the paddle in either direction to deflect
+        Vector2 closestBallCenter = closestBall.getBounds().getCenter(new Vector2());
+        Vector2 paddleCenter = paddle.getBounds().getCenter(new Vector2());
+
+        float yDistance = closestBallCenter.y - paddleCenter.y;
+
+        // Translate the paddle using trans
+        if (yDistance > MIN_PADDLE_TO_BALL_DISTANCE) {
+            paddle.setState(MOVING_UP);
+        } else if (yDistance < -MIN_PADDLE_TO_BALL_DISTANCE) {
+            paddle.setState(MOVING_DOWN);
+        } else {
+            paddle.setState(IDLE);
+        }
+    }
+
+    private Ball calculateClosestBall(Paddle paddle, DelayedRemovalArray<Ball> balls) {
+        float x = paddle.getX();
+        Ball closest = balls.get(0);            // initial ball ref
+        float d = Float.MAX_VALUE;              // initial max distance
+        Vector2 center = new Vector2();         // reusable center vector2
+        balls.begin();
+        for (Ball b : balls) {
+            b.getBounds().getCenter(center);    //calculate the center pos
+            float dist = Math.abs(center.x - x);
+            if (dist < d) { //if this ball is closer than last closest ball, this is the new closest ball
+                closest = b;
+                d = dist;
+            }
+        }
+        balls.end();
+        return closest;
+    }
+
+    public void setStuff(MainStuff stuff) {
+        this.stuff = stuff;
+    }
+}
