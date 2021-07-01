@@ -18,8 +18,7 @@ public abstract class Assets {
 
     public abstract void initializeAssets();
 
-    //DEMO FUNCTION
-    public Texture getSprite(String texture) {
-        return assetManager.get(texture);
+    public Texture getTexture(String assetPath) {
+        return assetManager.get(assetPath);
     }
 }
