@@ -13,7 +13,7 @@ public class Text {
     String text;
     protected Color color;
 
-    Text() {
+    public Text() {
         bounds = new Rectangle();
         font = new BitmapFont();
         text = "";

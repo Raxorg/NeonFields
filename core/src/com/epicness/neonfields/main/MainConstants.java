@@ -113,4 +113,7 @@ public class MainConstants {
     public static final float LIFE_GLOW_VISIBLE_SIZE = LIFE_GLOW_SIZE * 0.85f;
     public static final float LIFE_Y = CAMERA_HEIGHT - SHAPE_ZONE_MARGIN / 2f - LIFE_SIZE / 2f;
     public static final float LIFE_GLOW_MARGIN = LIFE_GLOW_VISIBLE_SIZE / 2f - LIFE_SIZE / 2f;
+
+    private MainConstants() {
+    }
 }
