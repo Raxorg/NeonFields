@@ -48,17 +48,17 @@ public class ProjectileHandler {
         Vector2 movementVector = new Vector2(1f, 1f).setAngleDeg(projectile.getMovementAngle());
         movementVector.x = movementVector.x * PROJECTILE_SPEED * delta;
         movementVector.y = movementVector.y * PROJECTILE_SPEED * delta;
-        projectile.setPosition(projectile.getOriginBasedX() + movementVector.x, projectile.getOriginBasedY() + movementVector.y);
+        projectile.setPosition(projectile.getCenterX() + movementVector.x, projectile.getCenterY() + movementVector.y);
     }
 
     private void checkProjectilePosition(Projectile projectile, DelayedRemovalArray<Projectile> projectiles) {
-        if (projectile.getOriginBasedX() <= -PROJECTILE_GLOW_SIZE) {
+        if (projectile.getCenterX() <= -PROJECTILE_GLOW_SIZE) {
             projectiles.removeValue(projectile, true);
-        } else if (projectile.getOriginBasedX() >= CAMERA_WIDTH + PROJECTILE_GLOW_SIZE) {
+        } else if (projectile.getCenterX() >= CAMERA_WIDTH + PROJECTILE_GLOW_SIZE) {
             projectiles.removeValue(projectile, true);
-        } else if (projectile.getOriginBasedY() <= -PROJECTILE_GLOW_SIZE) {
+        } else if (projectile.getCenterY() <= -PROJECTILE_GLOW_SIZE) {
             projectiles.removeValue(projectile, true);
-        } else if (projectile.getOriginBasedY() >= CAMERA_HEIGHT + PROJECTILE_GLOW_SIZE) {
+        } else if (projectile.getCenterY() >= CAMERA_HEIGHT + PROJECTILE_GLOW_SIZE) {
             projectiles.removeValue(projectile, true);
         }
     }

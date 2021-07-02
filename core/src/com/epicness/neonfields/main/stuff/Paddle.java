@@ -41,6 +41,10 @@ public class Paddle extends NeonSprite {
         glowSprite.setCenterY(y + PADDLE_HEIGHT / 2f);
     }
 
+    public float getCenterY() {
+        return sprite.getY() + sprite.getHeight() / 2f;
+    }
+
     public void translateY(float y) {
         sprite.translateY(y);
         glowSprite.translateY(y);

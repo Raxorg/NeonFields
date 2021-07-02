@@ -36,8 +36,8 @@ public class ExplosionHandler {
     public void explodeBall(Ball ball, DelayedRemovalArray<Ball> balls) {
         for (int i = 0; i < BALL_EXPLOSION_PROJECTILES; i++) {
             logic.getProjectileHandler().spawnProjectile(
-                    ball.getOriginBasedX(),
-                    ball.getOriginBasedY(),
+                    ball.getCenterX(),
+                    ball.getCenterY(),
                     (360f / BALL_EXPLOSION_PROJECTILES) * i,
                     ball.getColor());
         }

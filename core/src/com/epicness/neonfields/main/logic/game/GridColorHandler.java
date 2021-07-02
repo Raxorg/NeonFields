@@ -42,12 +42,12 @@ public class GridColorHandler {
     }
 
     private void colorBallCell(Ball ball, Grid grid) {
-        Cell cell = calculateCell(ball.getOriginBasedX(), ball.getOriginBasedY(), grid);
+        Cell cell = calculateCell(ball.getCenterX(), ball.getCenterY(), grid);
         cell.setOriginalColor(ball.getColor().cpy());
     }
 
     private void colorProjectileCell(Projectile projectile, Grid grid) {
-        Cell cell = calculateCell(projectile.getOriginBasedX(), projectile.getOriginBasedY(), grid);
+        Cell cell = calculateCell(projectile.getCenterX(), projectile.getCenterY(), grid);
         cell.setOriginalColor(projectile.getColor().cpy().lerp(Color.BLACK, 0.5f));
     }
 

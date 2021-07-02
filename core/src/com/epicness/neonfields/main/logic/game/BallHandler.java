@@ -68,7 +68,7 @@ public class BallHandler {
         Vector2 movementVector = new Vector2(1f, 1f).setAngleDeg(ball.getMovementAngle());
         movementVector.x = movementVector.x * ballSpeed;
         movementVector.y = movementVector.y * ballSpeed;
-        ball.setPosition(ball.getOriginBasedX() + movementVector.x * delta, ball.getOriginBasedY() + movementVector.y * delta);
+        ball.setPosition(ball.getCenterX() + movementVector.x * delta, ball.getCenterY() + movementVector.y * delta);
     }
 
     private void checkBallPosition(Ball ball, DelayedRemovalArray<Ball> balls) {

@@ -1,13 +1,15 @@
 package com.epicness.neonfields.main.logic.game;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.epicness.neonfields.main.stuff.Ball;
 import com.epicness.neonfields.main.stuff.Life;
 import com.epicness.neonfields.main.stuff.MainStuff;
 import com.epicness.neonfields.main.stuff.Paddle;
 
-import static com.epicness.neonfields.main.MainConstants.*;
+import static com.epicness.neonfields.main.MainConstants.MAX_PADDLE_Y;
+import static com.epicness.neonfields.main.MainConstants.MIN_PADDLE_Y;
+import static com.epicness.neonfields.main.MainConstants.PADDLE_AI_SPEED;
+import static com.epicness.neonfields.main.MainConstants.PADDLE_SPEED;
 import static com.epicness.neonfields.main.MainEnums.PaddleState.IDLE;
 import static com.epicness.neonfields.main.MainEnums.PaddleState.MOVING_DOWN;
 import static com.epicness.neonfields.main.MainEnums.PaddleState.MOVING_UP;
@@ -84,8 +86,7 @@ public class PaddleHandler {
         Paddle paddle = stuff.getPaddle1();
         if (paddle.isControlledByAI()) {
             solvePaddleAI(paddle, delta);
-        }
-        else {
+        } else {
             movePaddle(paddle, delta);
         }
         checkPaddleBounds(paddle);
@@ -93,11 +94,9 @@ public class PaddleHandler {
         paddle = stuff.getPaddle2();
         if (paddle.isControlledByAI()) {
             solvePaddleAI(paddle, delta);
-        }
-        else{
+        } else {
             movePaddle(paddle, delta);
         }
-
         checkPaddleBounds(paddle);
     }
 
@@ -129,12 +128,10 @@ public class PaddleHandler {
         }
         Ball closestBall = calculateClosestBall(paddle, balls);
         // Based on the ball position relative to the paddle, move the paddle in either direction to deflect
-        Vector2 closestBallCenter = closestBall.getBounds().getCenter(new Vector2());
-        Vector2 paddleCenter = paddle.getBounds().getCenter(new Vector2());
+        float ballCenterY = closestBall.getCenterY();
+        float yDistance = ballCenterY - paddle.getCenterY();
 
-        float yDistance = closestBallCenter.y - paddleCenter.y;
-
-        // Translate the paddle using trans
+        // Translate the paddle
         if (yDistance > 0) {
             //paddle.setState(MOVING_UP);
             paddle.translateY(yDistance * PADDLE_AI_SPEED * delta);
@@ -148,19 +145,17 @@ public class PaddleHandler {
 
     private Ball calculateClosestBall(Paddle paddle, DelayedRemovalArray<Ball> balls) {
         float x = paddle.getX();
-        Ball closest = balls.get(0);            // initial ball ref
-        float d = Float.MAX_VALUE;              // initial max distance
-        Vector2 center = new Vector2();         // reusable center vector2
-        balls.begin();
-        for (Ball b : balls) {
-            b.getBounds().getCenter(center);    //calculate the center pos
-            float dist = Math.abs(center.x - x);
-            if (dist < d) { //if this ball is closer than last closest ball, this is the new closest ball
-                closest = b;
+        Ball closest = balls.get(0);        // initial ball ref
+        float d = Float.MAX_VALUE;          // initial max distance
+        float centerX;                      // reusable center vector2
+        for (Ball ball : balls) {
+            centerX = ball.getCenterX();    // calculate the center position
+            float dist = Math.abs(centerX - x);
+            if (dist < d) {                 // if this ball is closer, this is the new closest ball
+                closest = ball;
                 d = dist;
             }
         }
-        balls.end();
         return closest;
     }
 

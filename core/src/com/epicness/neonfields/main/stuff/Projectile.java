@@ -20,16 +20,16 @@ public class Projectile extends NeonSprite {
         glowSprite.setOriginCenter();
     }
 
+    public float getCenterX() {
+        return sprite.getX() + sprite.getWidth() / 2f;
+    }
+
+    public float getCenterY() {
+        return sprite.getY() + sprite.getHeight() / 2f;
+    }
+
     public Rectangle getBounds() {
         return sprite.getBoundingRectangle();
-    }
-
-    public float getOriginBasedX() {
-        return sprite.getX() + sprite.getOriginX();
-    }
-
-    public float getOriginBasedY() {
-        return sprite.getY() + sprite.getOriginY();
     }
 
     public void setPosition(float x, float y) {
