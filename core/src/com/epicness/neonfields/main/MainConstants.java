@@ -29,6 +29,7 @@ public class MainConstants {
     public static final float PADDLE_GLOW_WIDTH = PADDLE_WIDTH * 3f;
     public static final float PADDLE_GLOW_HEIGHT = PADDLE_HEIGHT * 2f;
     public static final float PADDLE_SPEED = 600f;
+    public static final float PADDLE_AI_SPEED = 15f;
     public static final float MAX_PADDLE_Y = CAMERA_HEIGHT - SHAPE_ZONE_MARGIN - PADDLE_HEIGHT;
     public static final float MIN_PADDLE_Y = 0f;
     public static final float MIN_PADDLE_TO_BALL_DISTANCE = PADDLE_HEIGHT / 5f;

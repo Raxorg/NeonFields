@@ -7,10 +7,7 @@ import com.epicness.neonfields.main.stuff.Life;
 import com.epicness.neonfields.main.stuff.MainStuff;
 import com.epicness.neonfields.main.stuff.Paddle;
 
-import static com.epicness.neonfields.main.MainConstants.MAX_PADDLE_Y;
-import static com.epicness.neonfields.main.MainConstants.MIN_PADDLE_TO_BALL_DISTANCE;
-import static com.epicness.neonfields.main.MainConstants.MIN_PADDLE_Y;
-import static com.epicness.neonfields.main.MainConstants.PADDLE_SPEED;
+import static com.epicness.neonfields.main.MainConstants.*;
 import static com.epicness.neonfields.main.MainEnums.PaddleState.IDLE;
 import static com.epicness.neonfields.main.MainEnums.PaddleState.MOVING_DOWN;
 import static com.epicness.neonfields.main.MainEnums.PaddleState.MOVING_UP;
@@ -86,16 +83,21 @@ public class PaddleHandler {
     public void update(float delta) {
         Paddle paddle = stuff.getPaddle1();
         if (paddle.isControlledByAI()) {
-            solvePaddleAI(paddle);
+            solvePaddleAI(paddle, delta);
         }
-        movePaddle(paddle, delta);
+        else {
+            movePaddle(paddle, delta);
+        }
         checkPaddleBounds(paddle);
 
         paddle = stuff.getPaddle2();
         if (paddle.isControlledByAI()) {
-            solvePaddleAI(paddle);
+            solvePaddleAI(paddle, delta);
         }
-        movePaddle(paddle, delta);
+        else{
+            movePaddle(paddle, delta);
+        }
+
         checkPaddleBounds(paddle);
     }
 
@@ -120,7 +122,7 @@ public class PaddleHandler {
         }
     }
 
-    private void solvePaddleAI(Paddle paddle) {
+    private void solvePaddleAI(Paddle paddle, float delta) {
         DelayedRemovalArray<Ball> balls = stuff.getBalls();
         if (balls.size == 0f) {
             return;
@@ -133,10 +135,12 @@ public class PaddleHandler {
         float yDistance = closestBallCenter.y - paddleCenter.y;
 
         // Translate the paddle using trans
-        if (yDistance > MIN_PADDLE_TO_BALL_DISTANCE) {
-            paddle.setState(MOVING_UP);
-        } else if (yDistance < -MIN_PADDLE_TO_BALL_DISTANCE) {
-            paddle.setState(MOVING_DOWN);
+        if (yDistance > 0) {
+            //paddle.setState(MOVING_UP);
+            paddle.translateY(yDistance * PADDLE_AI_SPEED * delta);
+        } else if (yDistance < 0) {
+            //paddle.setState(MOVING_DOWN);
+            paddle.translateY(yDistance * PADDLE_AI_SPEED * delta);
         } else {
             paddle.setState(IDLE);
         }
