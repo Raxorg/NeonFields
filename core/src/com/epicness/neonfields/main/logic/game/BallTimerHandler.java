@@ -1,8 +1,8 @@
 package com.epicness.neonfields.main.logic.game;
 
+import com.epicness.fundamentals.stuff.Text;
 import com.epicness.neonfields.main.logic.MainLogic;
 import com.epicness.neonfields.main.stuff.MainStuff;
-import com.epicness.neonfields.main.stuff.hud.AdvancedText;
 
 import static com.epicness.neonfields.main.MainConstants.BALL_SPAWN_INTERVAL;
 
@@ -20,7 +20,7 @@ public class BallTimerHandler {
 
     public void update(float delta) {
         time -= delta;
-        AdvancedText ballTimer = stuff.getBallTimer();
+        Text ballTimer = stuff.getBallTimer();
         if (time <= 0f) {
             logic.getBallHandler().spawnBall();
             time = BALL_SPAWN_INTERVAL;

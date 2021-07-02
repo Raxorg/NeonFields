@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.epicness.fundamentals.stuff.Stuff;
+import com.epicness.fundamentals.stuff.Text;
 import com.epicness.neonfields.main.MainAssets;
 import com.epicness.neonfields.main.MainEnums.GameMode;
-import com.epicness.neonfields.main.stuff.hud.AdvancedText;
 import com.epicness.neonfields.main.stuff.hud.TextButton;
 import com.epicness.neonfields.main.stuff.shapes.Shape;
 
@@ -37,10 +37,10 @@ public class MainStuff extends Stuff {
     private Person person;
     private DelayedRemovalArray<Platform> platforms;
     private Sprite darkener;
-    private AdvancedText ballTimer;
+    private Text ballTimer;
     private DelayedRemovalArray<Life> paddle1Lives, paddle2Lives, personLives;
-    private AdvancedText startScreenText;
-    private AdvancedText gameOverText;
+    private Text startScreenText;
+    private Text gameOverText;
     private Sprite pancake;
     private TextButton test;
 
@@ -67,24 +67,24 @@ public class MainStuff extends Stuff {
         darkener.setSize(CAMERA_WIDTH, SHAPE_ZONE_MARGIN);
         darkener.setColor(Color.BLACK.cpy().lerp(Color.CLEAR, 0.25f));
 
-        ballTimer = new AdvancedText();
+        ballTimer = new Text();
         ballTimer.setFont(assets.getPixelFont4());
         ballTimer.setHorizontalAlignment(Align.center);
         ballTimer.setCenterVertical(true);
         ballTimer.setTextTargetWidth(CAMERA_WIDTH);
-        ballTimer.setPosition(0f, CAMERA_HEIGHT - SHAPE_ZONE_MARGIN / 2f);
+        ballTimer.setY(CAMERA_HEIGHT - SHAPE_ZONE_MARGIN / 2f);
 
         initializePaddleLives();
         initializePersonLives();
 
         initializeStartScreenText();
 
-        gameOverText = new AdvancedText();
+        gameOverText = new Text();
         gameOverText.setFont(assets.getPixelFont20());
         gameOverText.setHorizontalAlignment(Align.center);
         gameOverText.setCenterVertical(true);
         gameOverText.setTextTargetWidth(CAMERA_WIDTH);
-        gameOverText.setPosition(0f, CAMERA_HEIGHT / 2f);
+        gameOverText.setY(CAMERA_HEIGHT / 2f);
 
         pancake = new Sprite(assets.getPancake());
         pancake.setScale(0.75f);
@@ -93,12 +93,7 @@ public class MainStuff extends Stuff {
         pancake.setColor(Color.CLEAR);
 
         // EXAMPLE OF TEXT BUTTON
-        test = new TextButton(assets.getPixel()) {
-            @Override
-            public void OnCLick() {
-                //Transition to starting!
-            }
-        };
+        test = new TextButton(assets.getPixel());
         test.setX(200f);
         test.setY(200f);
         test.setSize(100f, 50f);
@@ -140,12 +135,12 @@ public class MainStuff extends Stuff {
     }
 
     private void initializeStartScreenText() {
-        startScreenText = new AdvancedText();
+        startScreenText = new Text();
         startScreenText.setFont(assets.getPixelFont20());
         startScreenText.setHorizontalAlignment(Align.center);
         startScreenText.setCenterVertical(true);
         startScreenText.setTextTargetWidth(CAMERA_WIDTH);
-        startScreenText.setPosition(0f, CAMERA_HEIGHT / 2f);
+        startScreenText.setY(CAMERA_HEIGHT / 2f);
         startScreenText.setText("Press enter to start");
     }
 
@@ -194,7 +189,7 @@ public class MainStuff extends Stuff {
         return darkener;
     }
 
-    public AdvancedText getBallTimer() {
+    public Text getBallTimer() {
         return ballTimer;
     }
 
@@ -206,22 +201,15 @@ public class MainStuff extends Stuff {
         return paddle2Lives;
     }
 
-    public DelayedRemovalArray<Life> getPaddleLives(Paddle paddle) {
-        if (paddle == paddle1) {
-            return paddle1Lives;
-        }
-        return paddle2Lives;
-    }
-
     public DelayedRemovalArray<Life> getPersonLives() {
         return personLives;
     }
 
-    public AdvancedText getStartScreenText() {
+    public Text getStartScreenText() {
         return startScreenText;
     }
 
-    public AdvancedText getGameOverText() {
+    public Text getGameOverText() {
         return gameOverText;
     }
 

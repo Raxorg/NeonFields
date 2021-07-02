@@ -3,55 +3,56 @@ package com.epicness.neonfields.main.stuff.hud;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.epicness.fundamentals.stuff.Text;
 
 public class TextButton {
 
     private final Sprite sprite;
-    private final AdvancedText advancedText;
+    private final Text text;
 
     public TextButton(Sprite buttonSprite) {
         sprite = new Sprite(buttonSprite);
-        advancedText = new AdvancedText();
+        text = new Text();
     }
 
     public void draw(SpriteBatch spriteBatch) {
         sprite.draw(spriteBatch);
-        advancedText.draw(spriteBatch);
+        text.draw(spriteBatch);
+    }
+
+    public boolean contains(float x, float y) {
+        return sprite.getBoundingRectangle().contains(x, y);
     }
 
     public void setX(float x) {
         sprite.setX(x);
-        advancedText.setX(x);
+        text.setX(x);
     }
 
     public void setY(float y) {
         sprite.setY(y);
-        advancedText.setY(y + sprite.getHeight() / 2f);
+        text.setY(y + sprite.getHeight() / 2f);
     }
 
     public void setSize(float width, float height) {
         sprite.setSize(width, height);
-        advancedText.setTextTargetWidth(width);
-        advancedText.setY(sprite.getY() + sprite.getHeight() / 2f);
+        text.setTextTargetWidth(width);
+        text.setY(sprite.getY() + sprite.getHeight() / 2f);
     }
 
     public void setFont(BitmapFont font) {
-        advancedText.setFont(font);
+        text.setFont(font);
     }
 
     public void setText(String text) {
-        advancedText.setText(text);
+        this.text.setText(text);
     }
 
     public void setHorizontalAlignment(int horizontalAlignment) {
-        advancedText.setHorizontalAlignment(horizontalAlignment);
+        text.setHorizontalAlignment(horizontalAlignment);
     }
 
     public void setCenterVertical(boolean centerVertical) {
-        advancedText.setCenterVertical(centerVertical);
-    }
-
-    public void OnCLick() {
-
+        text.setCenterVertical(centerVertical);
     }
 }
