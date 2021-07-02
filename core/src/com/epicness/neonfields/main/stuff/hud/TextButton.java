@@ -50,4 +50,8 @@ public class TextButton {
     public void setCenterVertical(boolean centerVertical) {
         advancedText.setCenterVertical(centerVertical);
     }
+
+    public void OnCLick() {
+
+    }
 }

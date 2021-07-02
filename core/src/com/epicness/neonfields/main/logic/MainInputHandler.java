@@ -1,5 +1,7 @@
 package com.epicness.neonfields.main.logic;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.epicness.fundamentals.input.InputHandler;
 import com.epicness.fundamentals.input.SharedInput;
 
@@ -16,6 +18,8 @@ public class MainInputHandler extends InputHandler {
 
     private SharedInput input;
     private MainLogic logic;
+    private boolean mouseDown;
+    private Vector2 mousePosition;
 
     public void setupInput() {
         input.setInputHandler(this);
@@ -24,7 +28,8 @@ public class MainInputHandler extends InputHandler {
 
     @Override
     public void touchDown(float x, float y) {
-
+        mouseDown = true;
+        mousePosition = new Vector2(x, y);
     }
 
     @Override
@@ -34,7 +39,7 @@ public class MainInputHandler extends InputHandler {
 
     @Override
     public void touchUp(float x, float y) {
-
+        mouseDown = false;
     }
 
     @Override
@@ -82,6 +87,14 @@ public class MainInputHandler extends InputHandler {
                 logic.getPaddleHandler().paddleDownRelease(false);
                 break;
         }
+    }
+
+    public Vector2 getMousePosition() {
+        return mousePosition;
+    }
+
+    public boolean getLeftMouseDown() {
+        return mouseDown;
     }
 
     // Structure

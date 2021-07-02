@@ -93,14 +93,19 @@ public class MainStuff extends Stuff {
         pancake.setColor(Color.CLEAR);
 
         // EXAMPLE OF TEXT BUTTON
-        /*test = new TextButton(assets.getPixel());
+        test = new TextButton(assets.getPixel()) {
+            @Override
+            public void OnCLick() {
+                //Transition to starting!
+            }
+        };
         test.setX(200f);
         test.setY(200f);
         test.setSize(100f, 50f);
-        test.setFont(assets.getPixelFont());
+        test.setFont(assets.getPixelFont4());
         test.setText("ASD");
         test.setHorizontalAlignment(Align.center);
-        test.setCenterVertical(true);*/
+        test.setCenterVertical(true);
     }
 
     private void initializeBorders() {
@@ -224,7 +229,7 @@ public class MainStuff extends Stuff {
         return pancake;
     }
 
-    public TextButton getTest() {
+    public TextButton getStartButton() {
         return test;
     }
 

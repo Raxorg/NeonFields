@@ -48,7 +48,7 @@ public class MainRenderer extends Renderer {
         stuff.getPancake().draw(spriteBatch);
         stuff.getGameOverText().draw(spriteBatch);
         stuff.getStartScreenText().draw(spriteBatch);
-        //stuff.getTest().draw(spriteBatch); EXAMPLE OF TEXT BUTTON
+        stuff.getStartButton().draw(spriteBatch); //EXAMPLE OF TEXT BUTTON
         spriteBatch.end();
     }
 
