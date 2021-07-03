@@ -1,9 +1,10 @@
 package com.epicness.neonfields.main.logic;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.epicness.fundamentals.input.InputHandler;
 import com.epicness.fundamentals.input.SharedInput;
+import com.epicness.neonfields.main.stuff.MainStuff;
+import com.epicness.neonfields.main.stuff.ui.TextButtonID;
 
 import static com.badlogic.gdx.Input.Keys.C;
 import static com.badlogic.gdx.Input.Keys.DOWN;
@@ -18,8 +19,7 @@ public class MainInputHandler extends InputHandler {
 
     private SharedInput input;
     private MainLogic logic;
-    private boolean mouseDown;
-    private Vector2 mousePosition;
+    private MainStuff stuff;
 
     public void setupInput() {
         input.setInputHandler(this);
@@ -28,8 +28,13 @@ public class MainInputHandler extends InputHandler {
 
     @Override
     public void touchDown(float x, float y) {
-        mouseDown = true;
-        mousePosition = new Vector2(x, y);
+        Array<TextButtonID> buttons = stuff.getButtonHolder().getButtons();
+        for (int i = 0; i < buttons.size; i++) {
+            TextButtonID button = buttons.get(i);
+            if (button.contains(x, y)) {
+                logic.getButtonHandler().buttonPressed(button.getElementID());
+            }
+        }
     }
 
     @Override
@@ -39,7 +44,7 @@ public class MainInputHandler extends InputHandler {
 
     @Override
     public void touchUp(float x, float y) {
-        mouseDown = false;
+
     }
 
     @Override
@@ -68,6 +73,7 @@ public class MainInputHandler extends InputHandler {
                 break;
             case ENTER:
                 logic.getStartScreenHandler().enterPressed();
+                break;
         }
     }
 
@@ -89,14 +95,6 @@ public class MainInputHandler extends InputHandler {
         }
     }
 
-    public Vector2 getMousePosition() {
-        return mousePosition;
-    }
-
-    public boolean getLeftMouseDown() {
-        return mouseDown;
-    }
-
     // Structure
     public void setInput(SharedInput input) {
         this.input = input;
@@ -104,5 +102,9 @@ public class MainInputHandler extends InputHandler {
 
     public void setLogic(MainLogic logic) {
         this.logic = logic;
+    }
+
+    public void setStuff(MainStuff stuff) {
+        this.stuff = stuff;
     }
 }

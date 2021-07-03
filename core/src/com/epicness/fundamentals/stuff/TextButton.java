@@ -1,9 +1,8 @@
-package com.epicness.neonfields.main.stuff.hud;
+package com.epicness.fundamentals.stuff;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.epicness.fundamentals.stuff.Text;
 
 public class TextButton {
 

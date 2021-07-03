@@ -14,6 +14,7 @@ import com.epicness.neonfields.main.logic.game.PersonHandler;
 import com.epicness.neonfields.main.logic.game.PlatformHandler;
 import com.epicness.neonfields.main.logic.game.ProjectileHandler;
 import com.epicness.neonfields.main.logic.game.ShapeGenerator;
+import com.epicness.neonfields.main.logic.menus.ButtonHandler;
 import com.epicness.neonfields.main.stuff.MainStuff;
 
 public class MainLogic extends Logic {
@@ -21,6 +22,7 @@ public class MainLogic extends Logic {
     // Helpers
     private final BallHandler ballHandler;
     private final BallTimerHandler ballTimerHandler;
+    private final ButtonHandler buttonHandler;
     private final ColorAssigner colorAssigner;
     private final DamageHandler damageHandler;
     private final ExplosionHandler explosionHandler;
@@ -38,6 +40,7 @@ public class MainLogic extends Logic {
     public MainLogic() {
         ballHandler = new BallHandler();
         ballTimerHandler = new BallTimerHandler();
+        buttonHandler = new ButtonHandler();
         colorAssigner = new ColorAssigner();
         damageHandler = new DamageHandler();
         explosionHandler = new ExplosionHandler();
@@ -96,10 +99,12 @@ public class MainLogic extends Logic {
     public void setStuff(MainStuff stuff) {
         ballHandler.setStuff(stuff);
         ballTimerHandler.setStuff(stuff);
+        buttonHandler.setStuff(stuff);
         colorAssigner.setStuff(stuff);
         damageHandler.setStuff(stuff);
         gameOverHandler.setStuff(stuff);
         gridColorHandler.setStuff(stuff);
+        mainInputHandler.setStuff(stuff);
         paddleHandler.setStuff(stuff);
         personHandler.setStuff(stuff);
         platformHandler.setStuff(stuff);
@@ -115,6 +120,10 @@ public class MainLogic extends Logic {
 
     public BallTimerHandler getBallTimerHandler() {
         return ballTimerHandler;
+    }
+
+    public ButtonHandler getButtonHandler() {
+        return buttonHandler;
     }
 
     public ColorAssigner getColorAssigner() {

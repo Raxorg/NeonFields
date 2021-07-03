@@ -8,8 +8,8 @@ import com.epicness.fundamentals.stuff.Stuff;
 import com.epicness.fundamentals.stuff.Text;
 import com.epicness.neonfields.main.MainAssets;
 import com.epicness.neonfields.main.MainEnums.GameMode;
-import com.epicness.neonfields.main.stuff.hud.TextButton;
 import com.epicness.neonfields.main.stuff.shapes.Shape;
+import com.epicness.neonfields.main.stuff.ui.ButtonHolder;
 
 import static com.epicness.fundamentals.SharedConstants.CAMERA_HEIGHT;
 import static com.epicness.fundamentals.SharedConstants.CAMERA_WIDTH;
@@ -42,7 +42,7 @@ public class MainStuff extends Stuff {
     private Text startScreenText;
     private Text gameOverText;
     private Sprite pancake;
-    private TextButton test;
+    private ButtonHolder buttonHolder;
 
     public void initializeStuff() {
         gameMode = STANDARD;
@@ -92,15 +92,7 @@ public class MainStuff extends Stuff {
         pancake.setOriginBasedPosition(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 5f);
         pancake.setColor(Color.CLEAR);
 
-        // EXAMPLE OF TEXT BUTTON
-        test = new TextButton(assets.getPixel());
-        test.setX(200f);
-        test.setY(200f);
-        test.setSize(100f, 50f);
-        test.setFont(assets.getPixelFont4());
-        test.setText("ASD");
-        test.setHorizontalAlignment(Align.center);
-        test.setCenterVertical(true);
+        buttonHolder = new ButtonHolder(assets);
     }
 
     private void initializeBorders() {
@@ -217,8 +209,8 @@ public class MainStuff extends Stuff {
         return pancake;
     }
 
-    public TextButton getStartButton() {
-        return test;
+    public ButtonHolder getButtonHolder() {
+        return buttonHolder;
     }
 
     // Structure
