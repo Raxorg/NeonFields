@@ -8,8 +8,8 @@ public class TextButtonID extends TextButton {
 
     private final ElementID elementID;
 
-    public TextButtonID(Sprite buttonSprite, ElementID elementID) {
-        super(buttonSprite);
+    public TextButtonID(ElementID elementID) {
+        super();
         this.elementID = elementID;
     }
 

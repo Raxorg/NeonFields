@@ -15,12 +15,12 @@ public class ButtonHolder {
         buttons = new Array<>();
 
         // EXAMPLE OF TEXT BUTTON
-        TextButtonID test = new TextButtonID(assets.getPixel(), PLAY_BUTTON);
+        TextButtonID test = new TextButtonID(PLAY_BUTTON);
         test.setX(200f);
         test.setY(200f);
-        test.setSize(100f, 50f);
+        test.setSize(200f, 100f);
         test.setFont(assets.getPixelFont4());
-        test.setText("ASD");
+        test.setText("Start Game");
         test.setHorizontalAlignment(Align.center);
         test.setCenterVertical(true);
         buttons.add(test);

@@ -1,42 +1,53 @@
 package com.epicness.fundamentals.stuff;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
+
+import java.util.Vector;
 
 public class TextButton {
 
-    private final Sprite sprite;
+    private Rectangle boundingBox;
     private final Text text;
+    private NinePatch ninePatch;
 
-    public TextButton(Sprite buttonSprite) {
-        sprite = new Sprite(buttonSprite);
+    public TextButton() {
         text = new Text();
+        boundingBox = new Rectangle();
+        Texture patch = new Texture(Gdx.files.internal("images/buttonPatch.png"));
+        ninePatch = new NinePatch(patch, 1, 1, 1, 1);
+        ninePatch.scale(8, 8);
     }
 
     public void draw(SpriteBatch spriteBatch) {
-        sprite.draw(spriteBatch);
+        //sprite.draw(spriteBatch);
+        ninePatch.draw(spriteBatch, boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
         text.draw(spriteBatch);
     }
 
     public boolean contains(float x, float y) {
-        return sprite.getBoundingRectangle().contains(x, y);
+        return boundingBox.contains(x, y);
     }
 
     public void setX(float x) {
-        sprite.setX(x);
+        boundingBox.setX(x);
         text.setX(x);
     }
 
     public void setY(float y) {
-        sprite.setY(y);
-        text.setY(y + sprite.getHeight() / 2f);
+        boundingBox.setY(y);
+        text.setY(y + boundingBox.getHeight() / 2f);
     }
 
     public void setSize(float width, float height) {
-        sprite.setSize(width, height);
+        boundingBox.setSize(width + 20, height + 20);
         text.setTextTargetWidth(width);
-        text.setY(sprite.getY() + sprite.getHeight() / 2f);
+        text.setY(boundingBox.getY() + boundingBox.getHeight() / 2f);
     }
 
     public void setFont(BitmapFont font) {
