@@ -11,20 +11,20 @@ public class SharedResources {
 
     private final SharedAssets assets;
     private final SharedLogic logic;
-    private final SharedInput sharedInput;
+    private final SharedInput input;
     private final SharedRenderer renderer;
     private final SharedScreen screen;
     private final SharedStuff stuff;
 
     public SharedResources(Game game) {
         assets = new SharedAssets();
-        sharedInput = new SharedInput();
+        input = new SharedInput();
         logic = new SharedLogic();
         renderer = new SharedRenderer();
         screen = new SharedScreen();
         stuff = new SharedStuff();
 
-        sharedInput.setCamera(screen.getDynamicCamera());
+        input.setCamera(screen.getDynamicCamera());
         logic.setSharedResources(this);
         renderer.setScreen(screen);
         renderer.setStuff(stuff);
@@ -47,7 +47,7 @@ public class SharedResources {
     }
 
     public SharedInput getInput() {
-        return sharedInput;
+        return input;
     }
 
     public SharedRenderer getRenderer() {

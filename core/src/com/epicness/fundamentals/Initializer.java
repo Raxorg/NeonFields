@@ -4,7 +4,7 @@ import com.epicness.fundamentals.assets.Assets;
 
 public abstract class Initializer {
 
-    protected Assets assets;
+    protected final Assets assets;
 
     public Initializer(Assets assets) {
         this.assets = assets;
