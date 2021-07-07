@@ -3,8 +3,8 @@ package com.epicness.neonfields.main.logic;
 import com.badlogic.gdx.utils.Array;
 import com.epicness.fundamentals.input.InputHandler;
 import com.epicness.fundamentals.input.SharedInput;
+import com.epicness.fundamentals.stuff.TextButton;
 import com.epicness.neonfields.main.stuff.MainStuff;
-import com.epicness.neonfields.main.stuff.ui.TextButtonID;
 
 import static com.badlogic.gdx.Input.Keys.C;
 import static com.badlogic.gdx.Input.Keys.DOWN;
@@ -28,9 +28,9 @@ public class MainInputHandler extends InputHandler {
 
     @Override
     public void touchDown(float x, float y) {
-        Array<TextButtonID> buttons = stuff.getButtonHolder().getButtons();
+        Array<TextButton> buttons = stuff.getButtonHolder().getButtons();
         for (int i = 0; i < buttons.size; i++) {
-            TextButtonID button = buttons.get(i);
+            TextButton button = buttons.get(i);
             if (button.contains(x, y)) {
                 logic.getButtonHandler().buttonPressed(button.getElementID());
             }

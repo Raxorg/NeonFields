@@ -1,6 +1,6 @@
 package com.epicness.neonfields.main.logic.menus;
 
-import com.epicness.neonfields.main.MainEnums.ElementID;
+import com.epicness.fundamentals.ElementID;
 import com.epicness.neonfields.main.stuff.MainStuff;
 
 public class ButtonHandler {

@@ -21,8 +21,4 @@ public class MainEnums {
     public enum PlayerID {
         PADDLE1, PADDLE2, PERSON
     }
-
-    public enum ElementID {
-        PLAY_BUTTON, CREDITS_BUTTON
-    }
 }
