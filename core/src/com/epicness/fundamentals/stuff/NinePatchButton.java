@@ -14,8 +14,8 @@ public class NinePatchButton extends TextButton {
     public NinePatchButton(ElementID elementID, Texture buttonNinePatch) {
         super(elementID);
         boundingBox = new Rectangle();
-        ninePatch = new NinePatch(buttonNinePatch, 1, 1, 1, 1);
-        ninePatch.scale(8, 8);
+        ninePatch = new NinePatch(buttonNinePatch, 32, 32, 32, 32);
+        ninePatch.scale(1, 1);
     }
 
     @Override
