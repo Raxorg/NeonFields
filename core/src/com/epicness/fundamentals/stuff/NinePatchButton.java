@@ -10,16 +10,19 @@ public class NinePatchButton extends TextButton {
 
     private final Rectangle boundingBox;
     private final NinePatch ninePatch;
+    private final NinePatch glowPatch;
 
-    public NinePatchButton(ElementID elementID, Texture buttonNinePatch) {
+    public NinePatchButton(ElementID elementID, Texture buttonNinePatch, Texture glowNinePatch) {
         super(elementID);
         boundingBox = new Rectangle();
         ninePatch = new NinePatch(buttonNinePatch, 32, 32, 32, 32);
         ninePatch.scale(1, 1);
+        glowPatch = new NinePatch(glowNinePatch, 32, 32, 32, 32);
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
+        glowPatch.draw(spriteBatch, boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
         ninePatch.draw(spriteBatch, boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
         super.draw(spriteBatch);
     }

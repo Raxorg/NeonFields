@@ -20,7 +20,8 @@ public class ButtonHolder {
 
         // EXAMPLE OF TEXT BUTTON
         Texture patch = new Texture(Gdx.files.internal("images/main/squareNinepatch.png"));
-        NinePatchButton test = new NinePatchButton(PLAY_BUTTON, patch);
+        Texture glowPatch = new Texture(Gdx.files.internal("images/main/squareNinePatchGlow.png"));
+        NinePatchButton test = new NinePatchButton(PLAY_BUTTON, patch, glowPatch);
         test.setX(200f);
         test.setY(200f);
         test.setSize(200f, 140f);
