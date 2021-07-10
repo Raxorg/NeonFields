@@ -2,6 +2,7 @@ package com.epicness.neonfields.main.logic.menus;
 
 import com.badlogic.gdx.graphics.Color;
 import com.epicness.fundamentals.logic.ActivationBehavior;
+import com.epicness.fundamentals.logic.DragBehavior;
 import com.epicness.fundamentals.logic.HoverBehavior;
 import com.epicness.fundamentals.stuff.Button;
 import com.epicness.neonfields.main.logic.MainLogic;
@@ -25,10 +26,22 @@ public class ButtonHandler {
 
                 @Override
                 public void onDehover() {
-                    button.setColor(Color.RED);
+                    button.setColor(Color.WHITE);
+                }
+            };
+            DragBehavior dragBehavior = new DragBehavior() {
+                @Override
+                public void onDrag() {
+                    button.setColor(Color.YELLOW);
+                }
+
+                @Override
+                public void onDedrag() {
+                    button.setColor(Color.WHITE);
                 }
             };
             button.setHoverBehavior(hoverBehavior);
+            button.setDragBehavior(dragBehavior);
         }
         ActivationBehavior activationBehavior = new ActivationBehavior() {
             @Override
@@ -46,6 +59,14 @@ public class ButtonHandler {
 
     public void buttonDehovered(Button button) {
         button.getHoverBehavior().onDehover();
+    }
+
+    public void buttonDragged(Button button) {
+        button.getDragBehavior().onDrag();
+    }
+
+    public void buttonDedragged(Button button) {
+        button.getDragBehavior().onDedrag();
     }
 
     public void buttonActivated(Button button) {

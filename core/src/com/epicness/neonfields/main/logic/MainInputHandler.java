@@ -29,7 +29,7 @@ public class MainInputHandler extends InputHandler {
         for (int i = 0; i < buttons.size; i++) {
             Button button = buttons.get(i);
             if (button.contains(x, y)) {
-                logic.getButtonHandler().buttonHovered(button);
+                logic.getButtonHandler().buttonDragged(button);
             }
         }
     }
@@ -39,9 +39,9 @@ public class MainInputHandler extends InputHandler {
         Array<Button> buttons = logic.getMenuHandler().getCurrentMenu().getButtons();
         for (int i = 0; i < buttons.size; i++) {
             Button button = buttons.get(i);
-            logic.getButtonHandler().buttonDehovered(button);
+            logic.getButtonHandler().buttonDedragged(button);
             if (button.contains(x, y)) {
-                logic.getButtonHandler().buttonHovered(button);
+                logic.getButtonHandler().buttonDragged(button);
             }
         }
     }
@@ -52,8 +52,21 @@ public class MainInputHandler extends InputHandler {
         for (int i = 0; i < buttons.size; i++) {
             Button button = buttons.get(i);
             logic.getButtonHandler().buttonDehovered(button);
+            logic.getButtonHandler().buttonDedragged(button);
             if (button.contains(x, y)) {
                 logic.getButtonHandler().buttonActivated(button);
+            }
+        }
+    }
+
+    @Override
+    public void mouseMoved(float x, float y) {
+        Array<Button> buttons = logic.getMenuHandler().getCurrentMenu().getButtons();
+        for (int i = 0; i < buttons.size; i++) {
+            Button button = buttons.get(i);
+            logic.getButtonHandler().buttonDehovered(button);
+            if (button.contains(x, y)) {
+                logic.getButtonHandler().buttonHovered(button);
             }
         }
     }

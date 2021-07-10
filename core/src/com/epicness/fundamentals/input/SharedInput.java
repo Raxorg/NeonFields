@@ -49,6 +49,16 @@ public class SharedInput extends InputAdapter {
     }
 
     @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        if (!enabled || inputHandler == null) {
+            return false;
+        }
+        unprojected = camera.unproject(new Vector3(screenX, screenY, 0f));
+        inputHandler.mouseMoved(unprojected.x, unprojected.y);
+        return true;
+    }
+
+    @Override
     public boolean keyDown(int keycode) {
         if (!enabled || inputHandler == null) {
             return false;
