@@ -34,7 +34,7 @@ public class MainMenu extends Menu {
         startButton.setText("Start Game");
         startButton.setHorizontalAlignment(Align.center);
         startButton.setCenterVertical(true);
-        textButtons.add(startButton);
+        buttons.add(startButton);
     }
 
     @Override

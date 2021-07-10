@@ -12,20 +12,20 @@ import static com.epicness.fundamentals.SharedConstants.CAMERA_WIDTH;
 public abstract class Menu {
 
     protected final Sprite background;
-    protected final Array<Button> textButtons;
+    protected final Array<Button> buttons;
 
     public Menu(Sprite backgroundSprite) {
         background = new Sprite(backgroundSprite);
         background.setSize(CAMERA_WIDTH, CAMERA_HEIGHT);
         background.setColor(Color.BLACK.cpy().lerp(Color.CLEAR, 0.4f));
 
-        textButtons = new Array<>();
+        buttons = new Array<>();
     }
 
     public void draw(SpriteBatch spriteBatch) {
         background.draw(spriteBatch);
-        for (int i = 0; i < textButtons.size; i++) {
-            textButtons.get(i).draw(spriteBatch);
+        for (int i = 0; i < buttons.size; i++) {
+            buttons.get(i).draw(spriteBatch);
         }
     }
 
@@ -34,6 +34,6 @@ public abstract class Menu {
     }
 
     public Array<Button> getButtons() {
-        return textButtons;
+        return buttons;
     }
 }
