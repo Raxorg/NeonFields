@@ -28,7 +28,6 @@ public class MenuHandler {
 
     public void hideMenus() {
         stuff.getMainMenu().setPosition(-CAMERA_WIDTH, -CAMERA_HEIGHT);
-        currentMenu = null;
     }
 
     public Menu getCurrentMenu() {
