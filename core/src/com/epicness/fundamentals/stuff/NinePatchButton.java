@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.epicness.fundamentals.ElementID;
 
 public class NinePatchButton extends TextButton {
 
@@ -12,8 +11,7 @@ public class NinePatchButton extends TextButton {
     private final NinePatch ninePatch;
     private final NinePatch glowPatch;
 
-    public NinePatchButton(ElementID elementID, Texture buttonNinePatch, Texture glowNinePatch) {
-        super(elementID);
+    public NinePatchButton(Texture buttonNinePatch, Texture glowNinePatch) {
         boundingBox = new Rectangle();
         ninePatch = new NinePatch(buttonNinePatch, 32, 32, 32, 32);
         ninePatch.scale(1, 1);

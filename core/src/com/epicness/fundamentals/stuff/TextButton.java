@@ -1,43 +1,51 @@
 package com.epicness.fundamentals.stuff;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.epicness.fundamentals.ElementID;
 import com.epicness.fundamentals.utils.TextUtils;
 
-public class TextButton {
+public class TextButton extends Button {
 
-    private final ElementID elementID;
     private final Rectangle bounds;
     protected final Text text;
 
-    public TextButton(ElementID elementID) {
-        this.elementID = elementID;
+    public TextButton() {
         bounds = new Rectangle();
         text = new Text();
     }
 
+    @Override
     public void draw(SpriteBatch spriteBatch) {
         text.draw(spriteBatch);
     }
 
+    @Override
     public boolean contains(float x, float y) {
         return bounds.contains(x, y);
     }
 
+    @Override
     public void setX(float x) {
         text.setX(x);
         bounds.x = x;
     }
 
+    @Override
     public void setY(float y) {
         text.setY(y);
         bounds.y = y;
     }
 
-    public ElementID getElementID() {
-        return elementID;
+    @Override
+    public void setColor(Color color) {
+        text.setColor(color);
+    }
+
+    public void setPosition(float x, float y) {
+        setX(x);
+        setY(y);
     }
 
     public void setFont(BitmapFont font) {

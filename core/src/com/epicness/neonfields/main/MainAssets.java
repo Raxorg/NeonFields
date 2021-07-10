@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.epicness.fundamentals.assets.Assets;
 
 import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
+import static com.epicness.neonfields.main.MainConstants.SQUARE_NINEPATCH;
+import static com.epicness.neonfields.main.MainConstants.SQUARE_NINEPATCH_GLOW;
 
 public class MainAssets extends Assets {
 
     // Sprites
-    private Sprite pixel;
     private Sprite paddle, paddleGlow;
     private Sprite circle, circleGlow, triangle, triangleGlow, square, squareGlow, romb, rombGlow;
     private Sprite dot, dotGlow;
@@ -22,9 +23,10 @@ public class MainAssets extends Assets {
 
     @Override
     public void queueAssetLoading() {
+        // Textures
+        assetManager.load(SQUARE_NINEPATCH, Texture.class);
+        assetManager.load(SQUARE_NINEPATCH_GLOW, Texture.class);
         // Sprites
-        assetManager.load("images/pixel.png", Texture.class);
-
         assetManager.load("images/main/paddle.png", Texture.class);
         assetManager.load("images/main/paddleGlow.png", Texture.class);
 
@@ -55,8 +57,6 @@ public class MainAssets extends Assets {
     @Override
     public void initializeAssets() {
         // Sprites
-        pixel = new Sprite(assetManager.get("images/pixel.png", Texture.class));
-
         paddle = new Sprite(assetManager.get("images/main/paddle.png", Texture.class));
         paddleGlow = new Sprite(assetManager.get("images/main/paddleGlow.png", Texture.class));
 
@@ -91,10 +91,6 @@ public class MainAssets extends Assets {
     }
 
     // Sprites
-    public Sprite getPixel() {
-        return pixel;
-    }
-
     public Sprite getPaddle() {
         return paddle;
     }

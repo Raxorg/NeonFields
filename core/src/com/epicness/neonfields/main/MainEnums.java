@@ -2,12 +2,12 @@ package com.epicness.neonfields.main;
 
 public class MainEnums {
 
-    public enum PaddleState {
-        MOVING_UP, IDLE, MOVING_DOWN
+    public enum MenuID {
+        MAIN_MENU, CREDITS
     }
 
-    public enum Controller {
-        PLAYER, AI
+    public enum PaddleState {
+        MOVING_UP, IDLE, MOVING_DOWN
     }
 
     public enum PersonState {

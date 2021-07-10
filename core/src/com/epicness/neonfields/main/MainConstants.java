@@ -7,6 +7,11 @@ import static com.epicness.fundamentals.SharedConstants.CAMERA_WIDTH;
 
 public class MainConstants {
 
+    // Buttons
+    public static final float START_BUTTON_WIDTH = 210f;
+    public static final float START_BUTTON_HEIGHT = 150f;
+    public static final float START_BUTTON_X = CAMERA_WIDTH / 2f - START_BUTTON_WIDTH / 2f;
+    public static final float START_BUTTON_Y = CAMERA_HEIGHT / 2f - START_BUTTON_HEIGHT / 2f;
     // Grid
     public static final float CELL_SIZE = CAMERA_HEIGHT / 30f;
     public static final int GRID_COLUMNS = (int) (CAMERA_WIDTH / CELL_SIZE);
@@ -32,7 +37,6 @@ public class MainConstants {
     public static final float PADDLE_AI_SPEED = 15f;
     public static final float MAX_PADDLE_Y = CAMERA_HEIGHT - SHAPE_ZONE_MARGIN - PADDLE_HEIGHT;
     public static final float MIN_PADDLE_Y = 0f;
-    public static final float MIN_PADDLE_TO_BALL_DISTANCE = PADDLE_HEIGHT / 5f;
     public static final int PADDLE_EXPLOSION_PROJECTILES = 32;
 
     // Person
@@ -114,6 +118,10 @@ public class MainConstants {
     public static final float LIFE_GLOW_VISIBLE_SIZE = LIFE_GLOW_SIZE * 0.85f;
     public static final float LIFE_Y = CAMERA_HEIGHT - SHAPE_ZONE_MARGIN / 2f - LIFE_SIZE / 2f;
     public static final float LIFE_GLOW_MARGIN = LIFE_GLOW_VISIBLE_SIZE / 2f - LIFE_SIZE / 2f;
+
+    // Assets
+    public static final String SQUARE_NINEPATCH = "images/main/squareNinepatch.png";
+    public static final String SQUARE_NINEPATCH_GLOW = "images/main/squareNinepatchGlow.png";
 
     private MainConstants() {
     }

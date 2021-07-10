@@ -27,6 +27,7 @@ public class MainInitializer extends Initializer {
         logic.setStuff(stuff);
         renderer.setScreen(screen);
         renderer.setStuff(stuff);
+        stuff.setSharedAssets(sharedResources.getAssets());
         stuff.setAssets(assets);
 
         stuff.initializeStuff();

@@ -8,6 +8,7 @@ import com.epicness.neonfields.main.logic.game.BallTimerHandler;
 import com.epicness.neonfields.main.logic.game.ColorAssigner;
 import com.epicness.neonfields.main.logic.game.DamageHandler;
 import com.epicness.neonfields.main.logic.game.ExplosionHandler;
+import com.epicness.neonfields.main.logic.game.GameSpeedHandler;
 import com.epicness.neonfields.main.logic.game.GridColorHandler;
 import com.epicness.neonfields.main.logic.game.PaddleHandler;
 import com.epicness.neonfields.main.logic.game.PersonHandler;
@@ -15,14 +16,16 @@ import com.epicness.neonfields.main.logic.game.PlatformHandler;
 import com.epicness.neonfields.main.logic.game.ProjectileHandler;
 import com.epicness.neonfields.main.logic.game.ShapeGenerator;
 import com.epicness.neonfields.main.logic.menus.ButtonHandler;
+import com.epicness.neonfields.main.logic.menus.MenuHandler;
 import com.epicness.neonfields.main.stuff.MainStuff;
+
+import static com.epicness.neonfields.main.MainEnums.MenuID.MAIN_MENU;
 
 public class MainLogic extends Logic {
 
     // Helpers
     private final BallHandler ballHandler;
     private final BallTimerHandler ballTimerHandler;
-    private final ButtonHandler buttonHandler;
     private final ColorAssigner colorAssigner;
     private final DamageHandler damageHandler;
     private final ExplosionHandler explosionHandler;
@@ -36,40 +39,55 @@ public class MainLogic extends Logic {
     private final ProjectileHandler projectileHandler;
     private final ShapeGenerator shapeGenerator;
     private final StartScreenHandler startScreenHandler;
+    // Menus
+    private final ButtonHandler buttonHandler;
+    private final MenuHandler menuHandler;
 
     public MainLogic() {
+        // Game
         ballHandler = new BallHandler();
         ballTimerHandler = new BallTimerHandler();
-        buttonHandler = new ButtonHandler();
         colorAssigner = new ColorAssigner();
         damageHandler = new DamageHandler();
         explosionHandler = new ExplosionHandler();
-        gameOverHandler = new GameOverHandler();
         gameSpeedHandler = new GameSpeedHandler();
-        mainInputHandler = new MainInputHandler();
         gridColorHandler = new GridColorHandler();
+
         paddleHandler = new PaddleHandler();
         personHandler = new PersonHandler();
         platformHandler = new PlatformHandler();
         projectileHandler = new ProjectileHandler();
         shapeGenerator = new ShapeGenerator();
+        // Menus
+        buttonHandler = new ButtonHandler();
+        menuHandler = new MenuHandler();
+
+        gameOverHandler = new GameOverHandler();
+        mainInputHandler = new MainInputHandler();
         startScreenHandler = new StartScreenHandler();
 
         ballHandler.setLogic(this);
         ballTimerHandler.setLogic(this);
         damageHandler.setLogic(this);
-        gameOverHandler.setLogic(this);
         gameSpeedHandler.setLogic(this);
-        mainInputHandler.setLogic(this);
         explosionHandler.setLogic(this);
         projectileHandler.setLogic(this);
+        // Menus
+        buttonHandler.setLogic(this);
+
+        gameOverHandler.setLogic(this);
+        mainInputHandler.setLogic(this);
         startScreenHandler.setLogic(this);
     }
 
     public void initialLogic() {
-        mainInputHandler.setupInput();
         ballHandler.spawnBall();
         platformHandler.spawnInitialPlatforms();
+
+        buttonHandler.setupBehaviors();
+        menuHandler.showMenu(MAIN_MENU);
+
+        mainInputHandler.setupInput();
     }
 
     @Override
@@ -99,18 +117,19 @@ public class MainLogic extends Logic {
     public void setStuff(MainStuff stuff) {
         ballHandler.setStuff(stuff);
         ballTimerHandler.setStuff(stuff);
-        buttonHandler.setStuff(stuff);
         colorAssigner.setStuff(stuff);
         damageHandler.setStuff(stuff);
         gameOverHandler.setStuff(stuff);
         gridColorHandler.setStuff(stuff);
-        mainInputHandler.setStuff(stuff);
         paddleHandler.setStuff(stuff);
         personHandler.setStuff(stuff);
         platformHandler.setStuff(stuff);
         projectileHandler.setStuff(stuff);
         shapeGenerator.setStuff(stuff);
         startScreenHandler.setStuff(stuff);
+        // Menus
+        buttonHandler.setStuff(stuff);
+        menuHandler.setStuff(stuff);
     }
 
     // Helpers
@@ -160,5 +179,10 @@ public class MainLogic extends Logic {
 
     public StartScreenHandler getStartScreenHandler() {
         return startScreenHandler;
+    }
+
+    // Menus
+    public MenuHandler getMenuHandler() {
+        return menuHandler;
     }
 }

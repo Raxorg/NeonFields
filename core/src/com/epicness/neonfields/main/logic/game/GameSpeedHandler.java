@@ -1,6 +1,7 @@
-package com.epicness.neonfields.main.logic;
+package com.epicness.neonfields.main.logic.game;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.epicness.neonfields.main.logic.MainLogic;
 
 import static com.epicness.neonfields.main.MainConstants.BALL_STARTING_SPEED;
 

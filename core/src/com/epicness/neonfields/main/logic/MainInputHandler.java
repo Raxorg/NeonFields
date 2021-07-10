@@ -3,12 +3,10 @@ package com.epicness.neonfields.main.logic;
 import com.badlogic.gdx.utils.Array;
 import com.epicness.fundamentals.input.InputHandler;
 import com.epicness.fundamentals.input.SharedInput;
-import com.epicness.fundamentals.stuff.TextButton;
-import com.epicness.neonfields.main.stuff.MainStuff;
+import com.epicness.fundamentals.stuff.Button;
 
 import static com.badlogic.gdx.Input.Keys.C;
 import static com.badlogic.gdx.Input.Keys.DOWN;
-import static com.badlogic.gdx.Input.Keys.ENTER;
 import static com.badlogic.gdx.Input.Keys.P;
 import static com.badlogic.gdx.Input.Keys.S;
 import static com.badlogic.gdx.Input.Keys.SPACE;
@@ -19,7 +17,6 @@ public class MainInputHandler extends InputHandler {
 
     private SharedInput input;
     private MainLogic logic;
-    private MainStuff stuff;
 
     public void setupInput() {
         input.setInputHandler(this);
@@ -28,23 +25,37 @@ public class MainInputHandler extends InputHandler {
 
     @Override
     public void touchDown(float x, float y) {
-        Array<TextButton> buttons = stuff.getButtonHolder().getButtons();
+        Array<Button> buttons = logic.getMenuHandler().getCurrentMenu().getButtons();
         for (int i = 0; i < buttons.size; i++) {
-            TextButton button = buttons.get(i);
+            Button button = buttons.get(i);
             if (button.contains(x, y)) {
-                logic.getButtonHandler().buttonPressed(button.getElementID());
+                logic.getButtonHandler().buttonHovered(button);
             }
         }
     }
 
     @Override
     public void touchDragged(float x, float y) {
-
+        Array<Button> buttons = logic.getMenuHandler().getCurrentMenu().getButtons();
+        for (int i = 0; i < buttons.size; i++) {
+            Button button = buttons.get(i);
+            logic.getButtonHandler().buttonDehovered(button);
+            if (button.contains(x, y)) {
+                logic.getButtonHandler().buttonHovered(button);
+            }
+        }
     }
 
     @Override
     public void touchUp(float x, float y) {
-
+        Array<Button> buttons = logic.getMenuHandler().getCurrentMenu().getButtons();
+        for (int i = 0; i < buttons.size; i++) {
+            Button button = buttons.get(i);
+            logic.getButtonHandler().buttonDehovered(button);
+            if (button.contains(x, y)) {
+                logic.getButtonHandler().buttonActivated(button);
+            }
+        }
     }
 
     @Override
@@ -70,9 +81,6 @@ public class MainInputHandler extends InputHandler {
                 break;
             case P:
                 logic.getGameOverHandler().pancake();
-                break;
-            case ENTER:
-                logic.getStartScreenHandler().enterPressed();
                 break;
         }
     }
@@ -102,9 +110,5 @@ public class MainInputHandler extends InputHandler {
 
     public void setLogic(MainLogic logic) {
         this.logic = logic;
-    }
-
-    public void setStuff(MainStuff stuff) {
-        this.stuff = stuff;
     }
 }

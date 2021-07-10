@@ -2,14 +2,12 @@ package com.epicness.fundamentals.stuff;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.epicness.fundamentals.ElementID;
 
 public class SpriteButton extends TextButton {
 
     private final Sprite sprite;
 
-    public SpriteButton(ElementID elementID, Sprite buttonSprite) {
-        super(elementID);
+    public SpriteButton(Sprite buttonSprite) {
         sprite = new Sprite(buttonSprite);
     }
 
