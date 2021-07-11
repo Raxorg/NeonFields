@@ -12,6 +12,10 @@ public class MainConstants {
     public static final float START_BUTTON_HEIGHT = 150f;
     public static final float START_BUTTON_X = CAMERA_WIDTH / 2f - START_BUTTON_WIDTH / 2f;
     public static final float START_BUTTON_Y = CAMERA_HEIGHT / 2f - START_BUTTON_HEIGHT / 2f;
+    public static final float QUIT_BUTTON_WIDTH = 210f;
+    public static final float QUIT_BUTTON_HEIGHT = 150f;
+    public static final float QUIT_BUTTON_X = START_BUTTON_X;
+    public static final float QUIT_BUTTON_Y = START_BUTTON_Y - 150f;
     // Grid
     public static final float CELL_SIZE = CAMERA_HEIGHT / 30f;
     public static final int GRID_COLUMNS = (int) (CAMERA_WIDTH / CELL_SIZE);
@@ -22,8 +26,8 @@ public class MainConstants {
     public static final float SHAPE_ZONE_MARGIN = 100f;
 
     // Players
-    public static final int STARTING_PADDLE_LIVES = 3;
-    public static final int STARTING_PERSON_LIVES = 2;
+    public static final int STARTING_PADDLE_LIVES = 1;
+    public static final int STARTING_PERSON_LIVES = 1;
 
     // Paddles
     public static final float PADDLE_WIDTH = 25f;
@@ -122,6 +126,9 @@ public class MainConstants {
     // Assets
     public static final String SQUARE_NINEPATCH = "images/main/squareNinepatch.png";
     public static final String SQUARE_NINEPATCH_GLOW = "images/main/squareNinepatchGlow.png";
+
+    // Game Over
+    public static final float GAME_OVER_DELAY = 3f;
 
     private MainConstants() {
     }

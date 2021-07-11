@@ -22,6 +22,7 @@ public class MainInitializer extends Initializer {
         SharedScreen screen = sharedResources.getScreen();
         MainStuff stuff = new MainStuff();
 
+        logic.setSharedLogic(sharedResources.getLogic());
         logic.setAssets(assets);
         logic.setInput(input);
         logic.setStuff(stuff);

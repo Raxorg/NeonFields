@@ -8,6 +8,7 @@ import com.epicness.neonfields.main.MainInitializer;
 import com.epicness.neonfields.splash.SplashStuff;
 
 import static com.epicness.neonfields.splash.SplashConstants.SPLASH_COLOR_INTERVAL;
+import static com.epicness.neonfields.splash.SplashConstants.SPLASH_DELAY;
 
 public class SplashHandler {
 
@@ -28,7 +29,7 @@ public class SplashHandler {
         sharedLogic.getAssetLoader().update();
         sharedLogic.getTransitionHandler().update();
         time += delta;
-        if (time >= 3f) {
+        if (time >= SPLASH_DELAY) {
             sharedLogic.getTransitionHandler().allowTransition();
         }
     }

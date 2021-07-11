@@ -1,5 +1,6 @@
 package com.epicness.neonfields.main.logic.menus;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.epicness.fundamentals.logic.ActivationBehavior;
 import com.epicness.fundamentals.logic.DragBehavior;
@@ -43,13 +44,21 @@ public class ButtonHandler {
             button.setHoverBehavior(hoverBehavior);
             button.setDragBehavior(dragBehavior);
         }
-        ActivationBehavior activationBehavior = new ActivationBehavior() {
+        ActivationBehavior startActivationBehavior = new ActivationBehavior() {
             @Override
             public void activate() {
                 logic.getStartScreenHandler().startGame();
             }
         };
-        stuff.getMainMenu().getStartButton().setActivationBehavior(activationBehavior);
+        stuff.getMainMenu().getStartButton().setActivationBehavior(startActivationBehavior);
+
+        ActivationBehavior quitActivationBehavior = new ActivationBehavior() {
+            @Override
+            public void activate() {
+                Gdx.app.exit();
+            }
+        };
+        stuff.getMainMenu().getQuitButton().setActivationBehavior(quitActivationBehavior);
     }
 
     // Input related

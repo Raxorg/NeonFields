@@ -2,6 +2,7 @@ package com.epicness.neonfields.main.logic;
 
 import com.epicness.fundamentals.input.SharedInput;
 import com.epicness.fundamentals.logic.Logic;
+import com.epicness.fundamentals.logic.SharedLogic;
 import com.epicness.neonfields.main.MainAssets;
 import com.epicness.neonfields.main.logic.game.BallHandler;
 import com.epicness.neonfields.main.logic.game.BallTimerHandler;
@@ -94,6 +95,7 @@ public class MainLogic extends Logic {
     public void update(float delta) {
         ballHandler.update(delta);
         ballTimerHandler.update(delta);
+        gameOverHandler.update(delta);
         gameSpeedHandler.update(delta);
         gridColorHandler.update(delta);
         paddleHandler.update(delta);
@@ -130,6 +132,10 @@ public class MainLogic extends Logic {
         // Menus
         buttonHandler.setStuff(stuff);
         menuHandler.setStuff(stuff);
+    }
+
+    public void setSharedLogic(SharedLogic sharedLogic) {
+        this.gameOverHandler.setSharedLogic(sharedLogic);
     }
 
     // Helpers

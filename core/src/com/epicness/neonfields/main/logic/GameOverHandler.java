@@ -1,14 +1,20 @@
 package com.epicness.neonfields.main.logic;
 
 import com.badlogic.gdx.graphics.Color;
+import com.epicness.fundamentals.logic.SharedLogic;
+import com.epicness.neonfields.main.MainInitializer;
 import com.epicness.neonfields.main.stuff.MainStuff;
+
+import static com.epicness.neonfields.main.MainConstants.GAME_OVER_DELAY;
 
 public class GameOverHandler {
 
     private MainStuff stuff;
     private MainLogic logic;
+    private SharedLogic sharedLogic;
     // Logic
     private boolean gameEnded;
+    private float gameOverDelay;
 
     public void checkGameEnded() {
         if (gameEnded || !logic.getStartScreenHandler().getGameStarted()) {
@@ -49,6 +55,17 @@ public class GameOverHandler {
         }
     }
 
+    public void update(float delta) {
+        if(gameEnded) {
+            gameOverDelay += delta;
+            if(gameOverDelay > GAME_OVER_DELAY) {
+                sharedLogic.getTransitionHandler().startTransition(new MainInitializer());
+                sharedLogic.getTransitionHandler().allowTransition();
+                sharedLogic.getTransitionHandler().update();
+            }
+        }
+    }
+
     public void setStuff(MainStuff stuff) {
         this.stuff = stuff;
     }
@@ -56,6 +73,10 @@ public class GameOverHandler {
 
     public void setLogic(MainLogic logic) {
         this.logic = logic;
+    }
+
+    public void setSharedLogic(SharedLogic sharedLogic) {
+        this.sharedLogic = sharedLogic;
     }
 
     public void pancake() {

@@ -6,16 +6,11 @@ import com.epicness.fundamentals.assets.SharedAssets;
 import com.epicness.fundamentals.stuff.NinePatchButton;
 import com.epicness.neonfields.main.MainAssets;
 
-import static com.epicness.neonfields.main.MainConstants.SQUARE_NINEPATCH;
-import static com.epicness.neonfields.main.MainConstants.SQUARE_NINEPATCH_GLOW;
-import static com.epicness.neonfields.main.MainConstants.START_BUTTON_HEIGHT;
-import static com.epicness.neonfields.main.MainConstants.START_BUTTON_WIDTH;
-import static com.epicness.neonfields.main.MainConstants.START_BUTTON_X;
-import static com.epicness.neonfields.main.MainConstants.START_BUTTON_Y;
+import static com.epicness.neonfields.main.MainConstants.*;
 
 public class MainMenu extends Menu {
 
-    private NinePatchButton startButton;
+    private NinePatchButton startButton, quitButton;
 
     public MainMenu(SharedAssets sharedAssets, MainAssets assets) {
         super(sharedAssets.getPixel());
@@ -35,15 +30,28 @@ public class MainMenu extends Menu {
         startButton.setHorizontalAlignment(Align.center);
         startButton.setCenterVertical(true);
         buttons.add(startButton);
+
+        quitButton = new NinePatchButton(patch, glowPatch);
+        quitButton.setX(QUIT_BUTTON_X);
+        quitButton.setY(QUIT_BUTTON_Y);
+        quitButton.setSize(QUIT_BUTTON_WIDTH, QUIT_BUTTON_HEIGHT);
+        quitButton.setFont(assets.getPixelFont4());
+        quitButton.setText("Quit Game");
+        quitButton.setHorizontalAlignment(Align.center);
+        quitButton.setCenterVertical(true);
+        buttons.add(quitButton);
     }
 
     @Override
     public void setPosition(float x, float y) {
         super.setPosition(x, y);
         startButton.setPosition(x + START_BUTTON_X, y + START_BUTTON_Y);
+        quitButton.setPosition(x + QUIT_BUTTON_X, y + QUIT_BUTTON_Y);
     }
 
     public NinePatchButton getStartButton() {
         return startButton;
     }
+
+    public NinePatchButton getQuitButton() { return quitButton; }
 }
