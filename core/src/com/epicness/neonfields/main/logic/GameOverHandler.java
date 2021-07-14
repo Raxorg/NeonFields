@@ -5,7 +5,8 @@ import com.epicness.fundamentals.logic.SharedLogic;
 import com.epicness.neonfields.main.MainInitializer;
 import com.epicness.neonfields.main.stuff.MainStuff;
 
-import static com.epicness.neonfields.main.MainConstants.GAME_OVER_DELAY;
+import static com.epicness.neonfields.main.MainConstants.GAME_OVER_TRANSITION_FADE_DURATION;
+import static com.epicness.neonfields.main.MainConstants.GAME_OVER_TRANSITION_MIN_DURATION;
 
 public class GameOverHandler {
 
@@ -56,12 +57,14 @@ public class GameOverHandler {
     }
 
     public void update(float delta) {
-        if(gameEnded) {
+        if (gameEnded) {
             gameOverDelay += delta;
-            if(gameOverDelay > GAME_OVER_DELAY) {
-                sharedLogic.getTransitionHandler().startTransition(new MainInitializer());
-                sharedLogic.getTransitionHandler().allowTransition();
-                sharedLogic.getTransitionHandler().update();
+            if (gameOverDelay > GAME_OVER_TRANSITION_MIN_DURATION) {
+                sharedLogic.getTransitionHandler().startTransition(
+                        new MainInitializer(),
+                        GAME_OVER_TRANSITION_FADE_DURATION,
+                        GAME_OVER_TRANSITION_MIN_DURATION);
+                sharedLogic.getTransitionHandler().update(delta);
             }
         }
     }

@@ -128,7 +128,8 @@ public class MainConstants {
     public static final String SQUARE_NINEPATCH_GLOW = "images/main/squareNinepatchGlow.png";
 
     // Game Over
-    public static final float GAME_OVER_DELAY = 3f;
+    public static final float GAME_OVER_TRANSITION_FADE_DURATION = 1f;
+    public static final float GAME_OVER_TRANSITION_MIN_DURATION = 3f;
 
     private MainConstants() {
     }

@@ -3,10 +3,12 @@ package com.epicness.neonfields.main;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.epicness.fundamentals.SharedScreen;
 import com.epicness.fundamentals.renderer.Renderer;
+import com.epicness.fundamentals.renderer.SharedRenderer;
 import com.epicness.neonfields.main.stuff.MainStuff;
 
 public class MainRenderer extends Renderer {
 
+    private SharedRenderer sharedRenderer;
     private SharedScreen screen;
     private MainStuff stuff;
 
@@ -49,6 +51,12 @@ public class MainRenderer extends Renderer {
         stuff.getGameOverText().draw(spriteBatch);
         stuff.getMainMenu().draw(spriteBatch);
         spriteBatch.end();
+        sharedRenderer.render();
+    }
+
+    // Structure
+    public void setSharedRenderer(SharedRenderer sharedRenderer) {
+        this.sharedRenderer = sharedRenderer;
     }
 
     public void setScreen(SharedScreen screen) {

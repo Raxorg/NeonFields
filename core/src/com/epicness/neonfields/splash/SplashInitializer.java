@@ -21,6 +21,7 @@ public class SplashInitializer extends Initializer {
 
         logic.setSharedLogic(sharedResources.getLogic());
         logic.setStuff(stuff);
+        renderer.setSharedRenderer(sharedResources.getRenderer());
         renderer.setScreen(screen);
         renderer.setStuff(stuff);
         screen.setLogic(logic);

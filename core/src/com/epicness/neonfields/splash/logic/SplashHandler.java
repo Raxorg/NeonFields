@@ -8,7 +8,8 @@ import com.epicness.neonfields.main.MainInitializer;
 import com.epicness.neonfields.splash.SplashStuff;
 
 import static com.epicness.neonfields.splash.SplashConstants.SPLASH_COLOR_INTERVAL;
-import static com.epicness.neonfields.splash.SplashConstants.SPLASH_DELAY;
+import static com.epicness.neonfields.splash.SplashConstants.SPLASH_TRANSITION_FADE_DURATION;
+import static com.epicness.neonfields.splash.SplashConstants.SPLASH_TRANSITION_MIN_DURATION;
 
 public class SplashHandler {
 
@@ -16,22 +17,21 @@ public class SplashHandler {
     private SplashStuff stuff;
     // Logic
     private Color previousColor, nextColor;
-    private float colorProgress, time;
+    private float colorProgress;
 
     public void initialize() {
         previousColor = Random.randomColor();
         nextColor = Random.exclusiveRandomColor(previousColor);
-        sharedLogic.getTransitionHandler().startTransition(new MainInitializer());
+        sharedLogic.getTransitionHandler().startTransition(
+                new MainInitializer(),
+                SPLASH_TRANSITION_FADE_DURATION,
+                SPLASH_TRANSITION_MIN_DURATION);
     }
 
     public void update(float delta) {
         updateColor(delta);
         sharedLogic.getAssetLoader().update();
-        sharedLogic.getTransitionHandler().update();
-        time += delta;
-        if (time >= SPLASH_DELAY) {
-            sharedLogic.getTransitionHandler().allowTransition();
-        }
+        sharedLogic.getTransitionHandler().update(delta);
     }
 
     private void updateColor(float delta) {
