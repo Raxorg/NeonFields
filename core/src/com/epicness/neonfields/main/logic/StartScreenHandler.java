@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.epicness.fundamentals.utils.TextUtils;
 import com.epicness.neonfields.main.MainAssets;
-import com.epicness.neonfields.main.stuff.Life;
 import com.epicness.neonfields.main.stuff.MainStuff;
-import com.epicness.neonfields.main.stuff.Paddle;
+import com.epicness.neonfields.main.stuff.pong.Life;
+import com.epicness.neonfields.main.stuff.pong.Paddle;
+import com.epicness.neonfields.main.stuff.pong.PongGame;
 
 import static com.badlogic.gdx.Input.Keys.DOWN;
 import static com.badlogic.gdx.Input.Keys.S;
@@ -39,13 +40,14 @@ public class StartScreenHandler {
         InitializePaddleLives();
         InitializePersonLives();
         resetPaddleStates();
-        logic.getColorAssigner().assignColors();
+        logic.getPongGameHandler().getColorAssigner().assignColors();
         gameStarted = true;
     }
 
     private void resetPaddleStates() {
+        PongGame pongGame = stuff.getPongGame();
         // Left paddle
-        Paddle paddle = stuff.getPaddle1();
+        Paddle paddle = pongGame.getPaddle1();
         if (Gdx.input.isKeyPressed(W)) {
             paddle.setState(MOVING_UP);
             if (Gdx.input.isKeyPressed(S)) {
@@ -56,7 +58,7 @@ public class StartScreenHandler {
         }
         paddle.setControlledByAI(false);
         // Right paddle
-        paddle = stuff.getPaddle2();
+        paddle = pongGame.getPaddle2();
         if (Gdx.input.isKeyPressed(UP)) {
             paddle.setState(MOVING_UP);
             if (Gdx.input.isKeyPressed(DOWN)) {
@@ -69,7 +71,8 @@ public class StartScreenHandler {
     }
 
     public void InitializePaddleLives() {
-        DelayedRemovalArray<Life> paddleLives = stuff.getPaddle1Lives();
+        PongGame pongGame = stuff.getPongGame();
+        DelayedRemovalArray<Life> paddleLives = pongGame.getPaddle1Lives();
         paddleLives.begin();
         paddleLives.clear();
         for (int i = 0; i < STARTING_PADDLE_LIVES; i++) {
@@ -78,7 +81,7 @@ public class StartScreenHandler {
             paddleLives.add(life);
         }
         paddleLives.end();
-        paddleLives = stuff.getPaddle2Lives();
+        paddleLives = pongGame.getPaddle2Lives();
         paddleLives.begin();
         for (int i = 0; i < STARTING_PADDLE_LIVES; i++) {
             Life life = new Life(assets.getHeart(), assets.getHeartGlow());
@@ -97,7 +100,7 @@ public class StartScreenHandler {
                 x += offset;
             }
             life.setPosition(x, LIFE_Y);
-            stuff.getPersonLives().add(life);
+            stuff.getPongGame().getPersonLives().add(life);
         }
     }
 

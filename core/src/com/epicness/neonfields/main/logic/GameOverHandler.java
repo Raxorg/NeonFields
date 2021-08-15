@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.epicness.fundamentals.logic.SharedLogic;
 import com.epicness.neonfields.main.MainInitializer;
 import com.epicness.neonfields.main.stuff.MainStuff;
+import com.epicness.neonfields.main.stuff.pong.PongGame;
 
 import static com.epicness.neonfields.main.MainConstants.GAME_OVER_TRANSITION_FADE_DURATION;
 import static com.epicness.neonfields.main.MainConstants.GAME_OVER_TRANSITION_MIN_DURATION;
@@ -21,38 +22,39 @@ public class GameOverHandler {
         if (gameEnded || !logic.getStartScreenHandler().getGameStarted()) {
             return;
         }
+        PongGame pongGame = stuff.getPongGame();
         int deadPlayers = 0;
-        if (stuff.getPersonLives().size <= 0) {
+        if (pongGame.getPersonLives().size <= 0) {
             deadPlayers++;
         }
-        if (stuff.getPaddle1Lives().size <= 0) {
+        if (pongGame.getPaddle1Lives().size <= 0) {
             deadPlayers++;
         }
-        if (stuff.getPaddle2Lives().size <= 0) {
+        if (pongGame.getPaddle2Lives().size <= 0) {
             deadPlayers++;
         }
         if (deadPlayers >= 2) {
             String winner = "BUG";
-            if (stuff.getPersonLives().size > 0) {
+            if (pongGame.getPersonLives().size > 0) {
                 winner = "PERSON";
             }
-            if (stuff.getPaddle1Lives().size > 0) {
+            if (pongGame.getPaddle1Lives().size > 0) {
                 winner = "LEFT PADDLE";
             }
-            if (stuff.getPaddle2Lives().size > 0) {
+            if (pongGame.getPaddle2Lives().size > 0) {
                 winner = "RIGHT PADDLE";
             }
 
             // Set all players to AI (for looks)
-            stuff.getPaddle1().setControlledByAI(true);
-            stuff.getPaddle2().setControlledByAI(true);
-            stuff.getPerson().setControlledByAI(true);
+            pongGame.getPaddle1().setControlledByAI(true);
+            pongGame.getPaddle2().setControlledByAI(true);
+            pongGame.getPerson().setControlledByAI(true);
 
-            stuff.getGameOverText().setText(winner + " WINS");
+            pongGame.getGameOverText().setText(winner + " WINS");
             gameEnded = true;
-            stuff.getPersonLives().clear();
-            stuff.getPaddle1Lives().clear();
-            stuff.getPaddle2Lives().clear();
+            pongGame.getPersonLives().clear();
+            pongGame.getPaddle1Lives().clear();
+            pongGame.getPaddle2Lives().clear();
         }
     }
 
@@ -83,11 +85,12 @@ public class GameOverHandler {
     }
 
     public void pancake() {
-        stuff.getGameOverText().setText("PANCAKE WINS");
-        stuff.getPancake().setColor(Color.WHITE);
+        PongGame pongGame = stuff.getPongGame();
+        pongGame.getGameOverText().setText("PANCAKE WINS");
+        pongGame.getPancake().setColor(Color.WHITE);
         gameEnded = true;
-        stuff.getPersonLives().clear();
-        stuff.getPaddle1Lives().clear();
-        stuff.getPaddle2Lives().clear();
+        pongGame.getPersonLives().clear();
+        pongGame.getPaddle1Lives().clear();
+        pongGame.getPaddle2Lives().clear();
     }
 }

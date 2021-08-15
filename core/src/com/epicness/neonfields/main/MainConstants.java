@@ -27,7 +27,7 @@ public class MainConstants {
 
     // Players
     public static final int STARTING_PADDLE_LIVES = 1;
-    public static final int STARTING_PERSON_LIVES = 1;
+    public static final int STARTING_PERSON_LIVES = 2;
 
     // Paddles
     public static final float PADDLE_WIDTH = 25f;
